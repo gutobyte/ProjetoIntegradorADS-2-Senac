@@ -10,6 +10,7 @@ Classe Conexao:
  
         return DriverManager.getConnection("jdbc:postgresql:postgres","postgres","gaara");
  
- onde postgres é nome da database e gaara senha do seu banco.
+ onde 'postgres' é nome da database e 'gaara' senha do seu banco.
  
+ OBS: É importante criar as tabelas: sexo, idade, deficiencia, cursos e escolha no Postgre antes de dar run no código.
  
