@@ -1,5 +1,7 @@
 # ProjetoIntegradorADS-2-Senac
 Projeto Integrador - Faculdade Senac - ADS - 2020/01
+Gustavo Moreira
+Vitor de Almeida
 
 
 ProjetoIntegradorADS-2-Senac/Integrador/src/main/java/projeto/
@@ -12,12 +14,12 @@ Classe Conexao:
  
  onde 'postgres' é nome da database e 'gaara' senha do seu banco.
  
- OBS: É importante criar as tabelas: sexo, idade, deficiencia, cursos e escolha no Postgre antes de dar run no código.
- Eu submeti um arquivo txt com os comandos do postgre para criar estas tabelas:
+ Comando postgree criar a tabela com os dados referente a pesquisa:
  
-     TabelasPostgre.txt
-Classe Principal
+     TabelaPostgre.txt
+     
+Classe Arquivo
 
-     LerArquivoCSV.lerArquivoCVS("C:\\Users\\gutow\\Documents\\teste2.csv");
+     LerArquivoCSV.lerArquivoCVS("C:\\Users\\gutow\\Documents\\DADOS.csv");
  
  O diretório onde se encontra o arquivo csv, eu submeti o arquivo também, para caso de testes.
