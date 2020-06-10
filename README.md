@@ -16,3 +16,8 @@ Classe Conexao:
  Eu submeti um arquivo txt com os comandos do postgre para criar estas tabelas:
  
      TabelasPostgre.txt
+Classe Principal
+
+     LerArquivoCSV.lerArquivoCVS("C:\\Users\\gutow\\Documents\\teste2.csv");
+ 
+ O diretório onde se encontra o arquivo csv, eu submeti o arquivo também, para caso de testes.
