@@ -8,7 +8,7 @@ Classe Conexao:
 
  É responsavel por fazer a conexão com o postgre, deve se alterar dentro do:
  
- return DriverManager.getConnection("jdbc:postgresql:postgres","postgres","gaara");
+        return DriverManager.getConnection("jdbc:postgresql:postgres","postgres","gaara");
  
  onde postgres é nome da database e gaara senha do seu banco.
  
