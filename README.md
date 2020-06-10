@@ -13,4 +13,5 @@ Classe Conexao:
  onde 'postgres' é nome da database e 'gaara' senha do seu banco.
  
  OBS: É importante criar as tabelas: sexo, idade, deficiencia, cursos e escolha no Postgre antes de dar run no código.
- 
+ Eu submeti um arquivo txt com os comandos do postgre para criar estas tabelas:
+     TabelasPostgre.txt
