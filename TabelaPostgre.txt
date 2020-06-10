@@ -1,0 +1,5 @@
+create table DADOS (
+	pergunta varchar,
+	opcao varchar,
+	quantidade int
+)
