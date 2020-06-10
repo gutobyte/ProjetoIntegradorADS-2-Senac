@@ -14,4 +14,5 @@ Classe Conexao:
  
  OBS: É importante criar as tabelas: sexo, idade, deficiencia, cursos e escolha no Postgre antes de dar run no código.
  Eu submeti um arquivo txt com os comandos do postgre para criar estas tabelas:
+ 
      TabelasPostgre.txt
