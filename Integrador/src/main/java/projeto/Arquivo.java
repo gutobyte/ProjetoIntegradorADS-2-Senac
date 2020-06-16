@@ -9,9 +9,92 @@ import java.sql.SQLException;
 
 public class Arquivo {
 
+	String perguntaA[];
+
+	public static void calcularDistribuicaoDeFrequencia(String pergunta) throws ClassNotFoundException, SQLException {
+		Connection con = null;
+		try {
+			con = Conexao.getConexao();
+			String sql = "SELECT OPCAO, QUANTIDADE FROM DADOS WHERE PERGUNTA = ? ORDER BY OPCAO";
+			PreparedStatement st1 = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			st1.setString(1, pergunta);
+			ResultSet rs1 = st1.executeQuery();
+			
+			double soma_f = 0;
+			
+			while (rs1.next()) {
+			//rs1.next();
+				soma_f = soma_f + rs1.getInt(2);
+			}
+			rs1.beforeFirst();
+			
+			String xi, mo, md;
+			mo = "";
+			md = "";
+			
+			double fi, fri, Fi, Fri, soma_fri, moda, mediana, med;			
+			fi = 0;
+			fri = 0;
+			Fi = 0;
+			Fri = 0;
+			soma_fri = 0;
+			moda = 0;
+			mediana = soma_f / 2;
+			med=0;
+			int xim=0;
+			int i = 1;
+			
+			DecimalFormat df = new DecimalFormat("0.0000");
+			df.setRoundingMode(RoundingMode.CEILING);
+
+			System.out.println("------------------------------------------");
+			System.out.println("| i | xi   | fi  | fri    | Fi | Fri     |");
+				
+		while (rs1.next()) {
+			
+				xi = rs1.getString(1);
+				fi = rs1.getInt(2);
+				fri = fi / soma_f;
+				Fi = Fi + fi;
+				Fri = Fi / soma_f;
+				soma_fri = soma_fri + fri;
+				xim+=1;
+				med= soma_f/xim;
+				
+				if (fi > moda) {
+					mo = xi;
+					moda = fi;
+				};
+				
+				if (mediana < Fi) {
+					md = xi;
+					mediana = 9999999;
+				}
+				
+				
+				
+				System.out.println("------------------------------------------");
+				System.out.println("| " + i + " | " + xi + " | " +  fi + " | " +  df.format(fri) + " | " + Fi + " | " + df.format(Fri) + " |");
+				i++;
+			}
+			System.out.println("------------------------------------------");
+			System.out.println("TOTAL     |" + soma_f + " | " + df.format(soma_fri));
+			System.out.println("------------------------------------------");
+			System.out.println("Moda (Mo): " + mo);
+			System.out.println("Mediana (Md): " + md);
+			System.out.println("Media: "+ med);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public static void limparTabelaDados() throws SQLException {
+		
+		
+		
 		Connection con = null;
 		try {
 			con = Conexao.getConexao();
@@ -39,6 +122,7 @@ public class Arquivo {
 			statement.setString(2, opcao); //2
 			ResultSet rs = statement.executeQuery();
 			while (rs.next() ) {
+			//rs.next();
 				System.out.println("Qtde de alunos: " + pergunta +" "+  opcao+": " + rs.getString(3));
 			}
 			rs.close();
@@ -68,7 +152,7 @@ public class Arquivo {
 
 			int count = 0;
 
-			lineReader.readLine(); // pula o cabecalho
+			lineReader.readLine(); // pula o cabeçalho
 
 			while ((lineText = lineReader.readLine()) != null) {
 				String[] data = lineText.split(",");
