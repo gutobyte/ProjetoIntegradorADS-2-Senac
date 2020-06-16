@@ -68,7 +68,7 @@ public class Arquivo {
 
 			int count = 0;
 
-			lineReader.readLine(); // pula o cabeçalho
+			lineReader.readLine(); // pula o cabecalho
 
 			while ((lineText = lineReader.readLine()) != null) {
 				String[] data = lineText.split(",");
