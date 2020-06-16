@@ -139,7 +139,8 @@ public class Arquivo {
 	}
 
 	public static void lerArquivoESalvarNoBanco() throws ClassNotFoundException, SQLException {
-		String arquivoCSV = "/home/vitor/eclipse-workspace/ProjetoIntegradorADS-2-Senac/DADOS.csv";
+		//String arquivoCSV = "/home/vitor/eclipse-workspace/ProjetoIntegradorADS-2-Senac/DADOS.csv";
+		String arquivoCSV = "DADOS.csv";
 
 		int batchSize = 20;
 		Connection con = null;
