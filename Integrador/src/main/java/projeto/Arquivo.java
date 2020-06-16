@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.math.RoundingMode;
 
 public class Arquivo {
 
@@ -25,7 +26,6 @@ public class Arquivo {
 			double soma_f = 0;
 			
 			while (rs1.next()) {
-			//rs1.next();
 				soma_f = soma_f + rs1.getInt(2);
 			}
 			rs1.beforeFirst();
@@ -51,7 +51,6 @@ public class Arquivo {
 			System.out.println("******************************************************************");
 			System.out.println("DISTRIBUIÇÃO DE FREQUÊNCIA " + pergunta);
 			System.out.println("------------------------------------------------------------------");
-			//System.out.printf("| i | xi | fi | fri | Fi | Fri |");
 			System.out.printf("|%2s|%17s|%10s|%10s|%10s|%10s|\n", "i", "xi", "fi", "fri", "Fi", "Fri");
 			double desvioPadrao = 0;
 			
@@ -128,7 +127,6 @@ public class Arquivo {
 			statement.setString(2, opcao); //2
 			ResultSet rs = statement.executeQuery();
 			while (rs.next() ) {
-			//rs.next();
 				System.out.println("Qtde de alunos: " + pergunta +" "+  opcao+": " + rs.getString(3));
 			}
 			rs.close();
