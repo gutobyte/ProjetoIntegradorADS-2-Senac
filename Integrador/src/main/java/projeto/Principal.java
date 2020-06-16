@@ -13,7 +13,9 @@ public class Principal  {
 	public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException  {
 	
 		//Arquivo.lerArquivoESalvarNoBanco();
-		Arquivo.lerDados("IDADE","25");
+
+		//Testando o metodo de calcular os dados  
+		Arquivo.calcularDistribuicaoDeFrequencia("IDADE");
 		
 	}
 		
