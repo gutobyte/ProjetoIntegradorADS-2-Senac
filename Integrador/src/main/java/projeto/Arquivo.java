@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.math.RoundingMode;
 
 public class Arquivo {
 
@@ -22,37 +21,39 @@ public class Arquivo {
 			PreparedStatement st1 = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			st1.setString(1, pergunta);
 			ResultSet rs1 = st1.executeQuery();
-			
+	
 			double soma_f = 0;
+			int qtde_registros = 0;
 			
 			while (rs1.next()) {
 				soma_f = soma_f + rs1.getInt(2);
+				qtde_registros++;
 			}
 			rs1.beforeFirst();
 			
 			String xi, mo, md;
 			mo = "";
 			md = "";
-			
-			double fi, fri, Fi, Fri, soma_fri, moda, mediana, med;			
+
+			double fi, fri, Fi, Fri, di, soma_fri, moda, mediana, media;			
 			fi = 0;
 			fri = 0;
 			Fi = 0;
 			Fri = 0;
+			di = 0;
 			soma_fri = 0;
 			moda = 0;
 			mediana = soma_f / 2;
-			med=0;
-			int xim=0;
 			int i = 1;
-			
+
+			media = soma_f / qtde_registros;
+
 			DecimalFormat df = new DecimalFormat("0.0000");
 			df.setRoundingMode(RoundingMode.CEILING);
-			System.out.println("******************************************************************");
+			System.out.println("*****************************************************************************");
 			System.out.println("DISTRIBUIÇÃO DE FREQUÊNCIA " + pergunta);
-			System.out.println("------------------------------------------------------------------");
-			System.out.printf("|%2s|%17s|%10s|%10s|%10s|%10s|\n", "i", "xi", "fi", "fri", "Fi", "Fri");
-			double desvioPadrao = 0;
+			System.out.println("-----------------------------------------------------------------------------");
+			System.out.printf("|%2s|%17s|%10s|%10s|%10s|%10s|%10s|\n", "i", "xi", "fi", "fri", "Fi", "Fri", "di");
 			
 			while (rs1.next()) {
 			
@@ -62,8 +63,7 @@ public class Arquivo {
 				Fi = Fi + fi;
 				Fri = Fi / soma_f;
 				soma_fri = soma_fri + fri;
-				xim+=1;
-				med= soma_f/xim;
+				di = fi - media;
 				
 				if (fi > moda) {
 					mo = xi;
@@ -75,20 +75,17 @@ public class Arquivo {
 					mediana = 9999999;
 				}
 				
-				desvioPadrao = desvioPadrao + (fi * fri);
-				
-				System.out.println("------------------------------------------------------------------");
-				System.out.printf("|%2s|%17s|%10s|%10s|%10s|%10s|\n", i, xi, fi, df.format(fri), Fi, df.format(Fri));
+				System.out.println("-----------------------------------------------------------------------------");
+				System.out.printf("|%2s|%17s|%10s|%10s|%10s|%10s|%10s|\n", i, xi, fi, df.format(fri), Fi, df.format(Fri), df.format(di));
 				i++;
 			}
-			System.out.println("------------------------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------------------");
 			System.out.printf("%s %26s|%10s|\n", "TOTAL", soma_f, df.format(soma_fri));
-			System.out.println("------------------------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------------------");
 			System.out.println("Moda (Mo): " + mo);
 			System.out.println("Mediana (Md): " + md);
-			System.out.println("Media: " + df.format(med));
-			System.out.println("Desvio padrão: " + df.format(desvioPadrao));
-			System.out.println("------------------------------------------------------------------");
+			System.out.println("Media: " + df.format(media));
+			System.out.println("-----------------------------------------------------------------------------");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -139,7 +136,6 @@ public class Arquivo {
 	}
 
 	public static void lerArquivoESalvarNoBanco() throws ClassNotFoundException, SQLException {
-		//String arquivoCSV = "/home/vitor/eclipse-workspace/ProjetoIntegradorADS-2-Senac/DADOS.csv";
 		String arquivoCSV = "DADOS.csv";
 
 		int batchSize = 20;
